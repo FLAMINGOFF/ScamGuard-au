@@ -1,10 +1,12 @@
 # ScamGuard AU 澳洲留学生防骗指南
 
 [![CI](https://github.com/FLAMINGOFF/scamguard-au/actions/workflows/ci.yml/badge.svg)](https://github.com/FLAMINGOFF/scamguard-au/actions/workflows/ci.yml)
-[![Lighthouse performance](https://img.shields.io/endpoint?url=https%3A%2F%2Fflamingoff.github.io%2Fscamguard-au%2Fbadges%2Fperformance.json)](https://github.com/FLAMINGOFF/scamguard-au/actions/workflows/ci.yml)
-[![Lighthouse accessibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fflamingoff.github.io%2Fscamguard-au%2Fbadges%2Faccessibility.json)](https://github.com/FLAMINGOFF/scamguard-au/actions/workflows/ci.yml)
-[![Lighthouse best practices](https://img.shields.io/endpoint?url=https%3A%2F%2Fflamingoff.github.io%2Fscamguard-au%2Fbadges%2Fbest-practices.json)](https://github.com/FLAMINGOFF/scamguard-au/actions/workflows/ci.yml)
-[![Lighthouse SEO](https://img.shields.io/endpoint?url=https%3A%2F%2Fflamingoff.github.io%2Fscamguard-au%2Fbadges%2Fseo.json)](https://github.com/FLAMINGOFF/scamguard-au/actions/workflows/ci.yml)
+[![Lighthouse performance](https://img.shields.io/endpoint?url=https%3A%2F%2Fflamingoff.github.io%2FScamGuard-au%2Fbadges%2Fperformance.json)](https://github.com/FLAMINGOFF/scamguard-au/actions/workflows/ci.yml)
+[![Lighthouse accessibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fflamingoff.github.io%2FScamGuard-au%2Fbadges%2Faccessibility.json)](https://github.com/FLAMINGOFF/scamguard-au/actions/workflows/ci.yml)
+[![Lighthouse best practices](https://img.shields.io/endpoint?url=https%3A%2F%2Fflamingoff.github.io%2FScamGuard-au%2Fbadges%2Fbest-practices.json)](https://github.com/FLAMINGOFF/scamguard-au/actions/workflows/ci.yml)
+[![Lighthouse SEO](https://img.shields.io/endpoint?url=https%3A%2F%2Fflamingoff.github.io%2FScamGuard-au%2Fbadges%2Fseo.json)](https://github.com/FLAMINGOFF/scamguard-au/actions/workflows/ci.yml)
+
+**网站 Live site：https://flamingoff.github.io/ScamGuard-au/**
 
 专为在澳中国留学生整理的中英双语防骗网站。A bilingual (Chinese / English) scam safety guide for Chinese international students in Australia.
 
