@@ -8,7 +8,8 @@ test.beforeEach(async ({ page }) => {
 test("home loads in Chinese by default with the 000 banner", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("澳洲留学生防骗指南");
+  await expect(page.locator("#brand")).toHaveText("澳洲留学生防骗指南");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("先别慌");
   await expect(page.locator(".danger-banner a[href='tel:000']")).toBeVisible();
   await expect(page.locator(".grid .card")).toHaveCount(8);
 });
@@ -17,7 +18,8 @@ test("language toggle switches to English and is remembered", async ({ page }) =
   await page.goto("/");
   await page.locator("#lang-toggle").click();
   await expect(page.locator("html")).toHaveAttribute("lang", "en-AU");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("ScamGuard AU");
+  await expect(page.locator("#brand")).toHaveText("ScamGuard AU");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Check here first");
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "en-AU");
   await page.locator("#lang-toggle").click();
@@ -26,7 +28,7 @@ test("language toggle switches to English and is remembered", async ({ page }) =
 
 test("?lang=en query forces English", async ({ page }) => {
   await page.goto("/?lang=en#/help");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Get help");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Get help and report");
 });
 
 test("every scam page renders all four sections", async ({ page }) => {
@@ -53,7 +55,7 @@ test("self-check: authority call with no loss, back and restart work", async ({ 
   await expect(page.getByRole("heading", { level: 2 })).toHaveText("Have you sent money or given personal details?");
   await page.getByRole("link", { name: "Not yet" }).click();
   await expect(page.locator(".result-ok h2")).toContainText("Hang up");
-  await page.getByRole("link", { name: "← Back" }).click();
+  await page.getByRole("link", { name: "Back", exact: true }).click();
   await expect(page).toHaveURL(/#\/check\/authority$/);
   await page.goto("/?lang=en#/check/authority/authorityNoLoss");
   await page.getByRole("link", { name: "Start over" }).click();
@@ -97,4 +99,23 @@ test("no horizontal scroll at phone width", async ({ page }) => {
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(overflow, route).toBeLessThanOrEqual(0);
   }
+});
+
+test("phone layout: bottom tab bar is visible and nav links work", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/?lang=en");
+  const nav = page.getByRole("navigation");
+  const box = await nav.boundingBox();
+  expect(box.y + box.height).toBeGreaterThan(800);
+  await nav.getByRole("link", { name: "Help" }).click();
+  await expect(page).toHaveURL(/#\/help$/);
+  await expect(nav.getByRole("link", { name: "Help" })).toHaveAttribute("aria-current", "page");
+});
+
+test("desktop layout: nav sits in the header", async ({ page, isMobile }) => {
+  test.skip(isMobile, "desktop only");
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/");
+  const box = await page.getByRole("navigation").boundingBox();
+  expect(box.y).toBeLessThan(150);
 });

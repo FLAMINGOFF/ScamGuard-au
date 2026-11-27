@@ -52,12 +52,18 @@ jobs:
       - run: npm ci
       # Phones ship CJK fonts (PingFang, Noto Sans CJK); the runner does not. Without one, Chrome
       # spends seconds on font fallback for the Chinese pages and Lighthouse misreports performance.
+      # apt-get update exits non-zero when any third-party source on the runner image is down
+      # (packages.microsoft.com returned 403 on 2026-11-27), even though the Ubuntu lists refresh fine.
+      # Don't let that fail the job; the install below still fails loudly if the font is unavailable.
       - name: Install Chinese fonts
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
+        run: |
+          sudo apt-get update -qq || echo "::warning::apt-get update reported errors from a third-party source"
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-list :lang=zh family | head -3
       - name: Run Lighthouse CI (fails below the thresholds in lighthouserc.json)
         run: npx lhci autorun
       - name: Build badge data
-        if: always()
+        if: always() && hashFiles('.lighthouseci/manifest.json') != ''
         run: node scripts/lighthouse-badges.js .lighthouseci badges
       - uses: actions/upload-artifact@v4
         if: always()
