@@ -1,0 +1,18 @@
+{
+  "name": "scamguard-au",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bilingual (zh/en) anti-scam guide for Chinese international students in Australia",
+  "scripts": {
+    "serve": "python3 -m http.server 4173",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "node --test tests/unit/*.test.js",
+    "test:e2e": "playwright test",
+    "lighthouse": "lhci autorun"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@lhci/cli": "0.14.0",
+    "@playwright/test": "1.63.0"
+  }
+}
